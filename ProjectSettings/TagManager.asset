@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HitMarker
   - LevelPart
+  - Clue
   layers:
   - Default
   - TransparentFX
