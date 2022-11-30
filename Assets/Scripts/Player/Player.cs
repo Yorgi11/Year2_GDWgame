@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Gun[] guns;
 
+    //Sebastians Addition for required variable
+    [SerializeField] private GameObject journalScreen;
+
     private float speed;
 
     private int horzin;
@@ -59,6 +62,16 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        //Sebastians Input Addition To Open Journal
+        if(Input.GetKey(KeyCode.Tab))
+        {
+            journalScreen.SetActive(true);
+        }
+        if(Input.GetKeyUp(KeyCode.Tab))
+        {
+            journalScreen.SetActive(false);
+        }
+
         // gets user input based on unity axis definitions (in this case wasd, LeftArrow RightArrow UpArrow DownArrow)
         horzin = (int)Input.GetAxisRaw("Horizontal");
         vertin = (int)Input.GetAxisRaw("Vertical");
