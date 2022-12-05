@@ -5,28 +5,30 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
-    [SerializeField] private float maxNumEnemies;
-
+    [SerializeField] private float scoreToSpawnNewEnemy;
     [SerializeField] private Transform[] spawnPoints;
 
     [SerializeField] private Enemy enemy;
 
     [SerializeField] private Text scoreText;
+    [SerializeField] private Text numEnemiesText;
 
     private int currentPoints;
 
-    private float currentNumEnemies;
+    private float currentNumEnemies = 0;
+    private float maxNumEnemies = 4;
 
     // Update is called once per frame
     void Update()
     {
         scoreText.text = "Score: " + currentPoints;
-        if (currentNumEnemies < maxNumEnemies + 4 && maxNumEnemies != 0)
+        numEnemiesText.text = "Enemies: " + currentNumEnemies;
+        if (currentNumEnemies < maxNumEnemies)
         {
-            Instantiate(enemy, spawnPoints[(int)Random.Range(0, spawnPoints.Length)]);
+            Instantiate(enemy, spawnPoints[(int)Random.Range(0, spawnPoints.Length - 1)], true);
             currentNumEnemies++;
         }
-        maxNumEnemies = (int)currentPoints / 500;
+        maxNumEnemies = (int)(4 + currentPoints / scoreToSpawnNewEnemy);
     }
 
     public void RemoveEnemy()
